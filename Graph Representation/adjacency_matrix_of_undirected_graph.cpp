@@ -18,13 +18,13 @@ int main()
             }
         }
     }
-    
+
     while (e--)
     {
         int a, b;
         cin >> a >> b;
         adj_mat[a][b] = 1;
-        adj_mat[b][a] = 1;
+        adj_mat[b][a] = 1; // for undirected graph
     }
     for (int i = 0; i < n; i++)
     {
