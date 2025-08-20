@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> adj_mat[1005];
-bool vis[1005];
+int level[1005];
 
 void bsf(int src)
 {
     queue<int> q;
     q.push(src);
-    vis[src] = true;
+    level[src] = 0;
 
     while (!q.empty())
     {
@@ -16,10 +16,10 @@ void bsf(int src)
 
         for (auto child : adj_mat[par])
         {
-            if (!vis[child])
+            if (level[child] == -1)
             {
                 q.push(child);
-                vis[child] = true;
+                level[child] = level[par] + 1;
             }
         }
     }
@@ -37,12 +37,16 @@ int main()
         adj_mat[a].push_back(b);
         adj_mat[b].push_back(a);
     }
-    memset(vis, false, sizeof(vis));
+    memset(level, -1, sizeof(level));
     int src, dst;
     cin >> src >> dst;
     bsf(src);
 
-    cout << (vis[dst] ? "YES" : "NO") << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << i << "->" << level[i] << endl;
+    }
 
+    // cout << level[dst] << endl;
     return 0;
 }
