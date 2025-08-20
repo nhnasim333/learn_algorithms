@@ -10,6 +10,7 @@ void bfs(int src)
     queue<int> q;
     q.push(src);
     vis[src] = true;
+    parent[src] = -1;
 
     while (!q.empty())
     {
@@ -41,22 +42,30 @@ int main()
         adj_list[b].push_back(a);
     }
 
-    memset(vis, false, sizeof(vis));
-    memset(parent, -1, sizeof(parent));
     int q;
     cin >> q;
     while (q--)
     {
         int src, dst;
         cin >> src >> dst;
+
+        memset(vis, false, sizeof(vis));
+        memset(parent, -1, sizeof(parent));
+
         bfs(src);
+
         if (!vis[dst])
-        {
-            cout << "No path exists from " << src << " to " << dst << endl;
-        }
+            cout << -1 << endl;
         else
         {
-            cout << "Path exists from " << src << " to " << dst << endl;
+            int dist = 0;
+            int node = dst;
+            while (parent[node] != -1)
+            {
+                dist++;
+                node = parent[node];
+            }
+            cout << dist << endl;
         }
     }
 

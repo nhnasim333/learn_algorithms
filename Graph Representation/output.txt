@@ -1,6 +1,6 @@
-Path exists from 0 to 5
-Path exists from 1 to 5
-Path exists from 2 to 5
-Path exists from 2 to 3
-Path exists from 1 to 4
-No path exists from 0 to 9
+2
+3
+3
+2
+2
+0
