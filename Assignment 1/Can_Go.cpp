@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-char grid[105][105];
-bool vis[105][105];
+char grid[1005][1005];
+bool vis[1005][1005];
 vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 int n, m;
 
@@ -12,32 +12,64 @@ bool valid(int i, int j)
     return true;
 }
 
-void dfs(int si, int sj)
+bool bfs(int si, int sj, int di, int dj)
 {
-    cout << si << " " << sj << endl;
+    queue<pair<int, int>> q;
+    q.push({si, sj});
     vis[si][sj] = true;
-    for (int i = 0; i < 4; i++)
-    {
-        int ci = si + directions[i].first;
-        int cj = sj + directions[i].second;
 
-        if (!vis[ci][cj] && valid(ci, cj))
-            dfs(ci, cj);
+    while (!q.empty())
+    {
+        pair<int, int> par = q.front();
+        int par_i = par.first;
+        int par_j = par.second;
+        q.pop();
+
+        if (par_i == di && par_j == dj)
+            return true;
+
+        for (auto d : directions)
+        {
+            int nx = par_i + d.first, ny = par_j + d.second;
+            if (valid(nx, ny) && !vis[nx][ny] && (grid[nx][ny] == '.' || grid[nx][ny] == 'B'))
+            {
+                vis[nx][ny] = true;
+                q.push({nx, ny});
+            }
+        }
     }
+    return false;
 }
 
 int main()
 {
     cin >> n >> m;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            cin >> grid[i][j];
+    int si = -1, sj = -1, di = -1, dj = -1;
 
-    int si, sj;
-    cin >> si >> sj;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> grid[i][j];
+            if (grid[i][j] == 'A')
+            {
+                si = i;
+                sj = j;
+            }
+            if (grid[i][j] == 'B')
+            {
+                di = i;
+                dj = j;
+            }
+        }
+    }
+
     memset(vis, false, sizeof(vis));
 
-    dfs(si, sj);
+    if (bfs(si, sj, di, dj))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 
     return 0;
 }
