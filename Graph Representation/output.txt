@@ -1,1 +1,1 @@
-Distance from (1, 2) to (2, 0) is: 5
+Distance from (1, 2) to (2, 0) is: 3

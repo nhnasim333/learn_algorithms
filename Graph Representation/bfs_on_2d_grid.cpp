@@ -22,7 +22,7 @@ void bfs(int si, int sj)
 
     while (!q.empty())
     {
-        auto par = q.front();
+        pair<int, int> par = q.front();
         q.pop();
 
         int par_i = par.first;
