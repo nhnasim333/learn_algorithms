@@ -5,7 +5,6 @@ bool vis[1005];
 
 void dfs(int src)
 {
-    cout << src << " ";
     vis[src] = true;
     for (int child : adj_list[src])
         if (!vis[child])
@@ -24,13 +23,15 @@ int main()
         adj_list[b].push_back(a);
     }
     memset(vis, false, sizeof(vis));
+    int cnt = 0;
     for (int i = 0; i < n; i++)
     {
         if (!vis[i])
         {
             dfs(i);
-            cout << endl;
+            cnt++;
         }
     }
+    cout << cnt << endl;
     return 0;
 }
