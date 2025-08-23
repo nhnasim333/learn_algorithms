@@ -26,11 +26,11 @@ int main()
     int cnt = 0;
     for (int i = 0; i < n; i++)
     {
-        // if (!vis[i])
-        // {
-        //     dfs(i);
-        //     cnt++;
-        // }
+        if (!vis[i])
+        {
+            dfs(i);
+            cnt++;
+        }
     }
     cout << cnt << endl;
     return 0;
