@@ -3,12 +3,14 @@ using namespace std;
 vector<int> adj_list[1005];
 bool vis[1005];
 
-void dfs(int src)
+int dfs(int src)
 {
     vis[src] = true;
+    int cnt = 1;
     for (int child : adj_list[src])
         if (!vis[child])
-            dfs(child);
+            cnt += dfs(child);
+    return cnt;
 }
 
 int main()
@@ -28,8 +30,8 @@ int main()
     {
         if (!vis[i])
         {
-            dfs(i);
-            components_sizes.push_back(i);
+            int size = dfs(i);
+            components_sizes.push_back(size);
         }
     }
     for (int comp : components_sizes)
