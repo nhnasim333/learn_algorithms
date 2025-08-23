@@ -34,6 +34,7 @@ int main()
             components_sizes.push_back(size);
         }
     }
+    sort(components_sizes.begin(), components_sizes.end());
     for (int comp : components_sizes)
         cout << comp << " ";
     cout << endl;
