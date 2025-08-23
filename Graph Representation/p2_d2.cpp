@@ -23,15 +23,17 @@ int main()
         adj_list[b].push_back(a);
     }
     memset(vis, false, sizeof(vis));
-    int cnt = 0;
+    vector<int> components_sizes;
     for (int i = 0; i < n; i++)
     {
         if (!vis[i])
         {
             dfs(i);
-            cnt++;
+            components_sizes.push_back(i);
         }
     }
-    cout << cnt << endl;
+    for (int comp : components_sizes)
+        cout << comp << " ";
+    cout << endl;
     return 0;
 }
