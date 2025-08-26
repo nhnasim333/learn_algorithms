@@ -12,7 +12,7 @@ void dfs(int src)
 
     for (int child : adj_list[src])
     {
-        if (vis[child] && pathvis[src])
+        if (vis[child] && pathvis[child])
             cycle = true;
         if (!vis[child])
         {
@@ -31,7 +31,6 @@ int main()
         int a, b;
         cin >> a >> b;
         adj_list[a].push_back(b);
-        adj_list[b].push_back(a);
     }
     memset(vis, false, sizeof(vis));
     memset(pathvis, false, sizeof(pathvis));
