@@ -11,10 +11,12 @@ void dfs(int src)
 
     for (int child : adj_list[src])
     {
+        if (vis[child] && parent[src] != child)
+            cycle = true;
         if (!vis[child])
         {
-            dfs(child);
             parent[child] = src;
+            dfs(child);
         }
     }
 }
@@ -42,10 +44,10 @@ int main()
         }
     }
 
-    for (int i = 0; i < n; i++)
-    {
-        cout << i << "-> " << parent[i] << endl;
-    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << i << "-> " << parent[i] << endl;
+    // }
 
     if (cycle)
         cout << "Cycle detected" << endl;
