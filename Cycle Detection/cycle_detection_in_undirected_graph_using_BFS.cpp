@@ -15,10 +15,11 @@ void bfs(int src)
     {
         int par = q.front();
         q.pop();
-        cout << par << " ";
 
         for (int child : adj_list[par])
         {
+            if (vis[child] && parent[par] != child)
+                cycle = true;
             if (!vis[child])
             {
                 q.push(child);
@@ -51,6 +52,11 @@ int main()
             bfs(i);
         }
     }
+
+    if (cycle)
+        cout << "Cycle detected" << endl;
+    else
+        cout << "No cycle" << endl;
 
     return 0;
 }
