@@ -2,6 +2,8 @@
 using namespace std;
 vector<int> adj_list[105];
 int vis[105];
+int parent[105];
+bool cycle;
 
 void bfs(int src)
 {
@@ -21,6 +23,7 @@ void bfs(int src)
             {
                 q.push(child);
                 vis[child] = true;
+                parent[child] = par;
             }
         }
     }
@@ -38,6 +41,8 @@ int main()
         adj_list[b].push_back(a);
     }
     memset(vis, false, sizeof(vis));
+    memset(parent, -1, sizeof(parent));
+    cycle = false;
 
     for (int i = 0; i < n; i++)
     {
