@@ -3,6 +3,7 @@ using namespace std;
 
 struct cmp
 {
+    // This comparator is used to create a min-heap based on the second element of the pairs
     bool operator()(const pair<int, int> &a, const pair<int, int> &b)
     {
         // Compare based on the second element (priority)
@@ -18,6 +19,7 @@ int main()
     pq.push({0, 1});
     while (!pq.empty())
     {
+        // greater func always returns the first element with the lowest priority
         cout << pq.top().first << " " << pq.top().second << endl;
         pq.pop();
     }
