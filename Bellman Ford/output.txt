@@ -1,4 +1,1 @@
-0->0
-1->5
-2->17
-3->19
+Graph contains negative weight cycle
