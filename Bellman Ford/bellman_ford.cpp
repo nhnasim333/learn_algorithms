@@ -13,6 +13,7 @@ public:
     }
 };
 
+int dis[105];
 int main()
 {
     int n, e;
@@ -25,10 +26,26 @@ int main()
         edge_list.push_back(Edge(a, b, w));
     }
 
-    for (auto ed : edge_list)
+    for (int i = 0; i < n; i++)
+        dis[i] = INT_MAX;
+
+    dis[0] = 0;
+
+    for (int i = 0; i < n - 1; i++)
     {
-        cout << ed.a << " " << ed.b << " " << ed.w << "\n";
+        for (auto ed : edge_list)
+        {
+            int a = ed.a;
+            int b = ed.b;
+            int w = ed.w;
+
+            if (dis[a] != INT_MAX && dis[a] + w < dis[b])
+                dis[b] = dis[a] + w;
+        }
     }
+
+    for (int i = 0; i < n; i++)
+        cout << i << "->" << dis[i] << endl;
 
     return 0;
 }
