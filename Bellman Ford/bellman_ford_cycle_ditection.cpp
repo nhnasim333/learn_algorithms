@@ -31,6 +31,30 @@ void bellman_ford()
                 dis[b] = dis[a] + w;
         }
     }
+
+    bool has_cycle = false;
+    for (auto ed : edge_list)
+    {
+        int a = ed.a;
+        int b = ed.b;
+        int w = ed.w;
+
+        if (dis[a] != INT_MAX && dis[a] + w < dis[b])
+        {
+            has_cycle = true;
+            break;
+        }
+    }
+
+    if (has_cycle)
+    {
+        cout << "Graph contains negative weight cycle" << endl;
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+            cout << i << "->" << dis[i] << endl;
+    }
 }
 
 int main()
@@ -49,9 +73,6 @@ int main()
     dis[0] = 0;
 
     bellman_ford();
-
-    for (int i = 0; i < n; i++)
-        cout << i << "->" << dis[i] << endl;
 
     return 0;
 }
