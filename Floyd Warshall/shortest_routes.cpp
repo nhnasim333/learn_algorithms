@@ -22,8 +22,8 @@ int main()
     {
         long long int a, b, w;
         cin >> a >> b >> w;
-        adj_mat[a][b] = w;
-        adj_mat[b][a] = w;
+        adj_mat[a][b] = min(adj_mat[a][b], w);
+        adj_mat[b][a] = min(adj_mat[b][a], w);
     }
 
     for (int k = 1; k <= n; k++)
