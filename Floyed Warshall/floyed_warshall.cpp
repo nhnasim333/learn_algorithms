@@ -11,10 +11,10 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            // if (i == j)
-            //     adj_mat[i][j] = 0;
-            // else
-            adj_mat[i][j] = INT_MAX;
+            if (i == j)
+                adj_mat[i][j] = 0;
+            else
+                adj_mat[i][j] = INT_MAX;
         }
     }
 
