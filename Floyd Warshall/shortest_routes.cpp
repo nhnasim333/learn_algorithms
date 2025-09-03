@@ -42,12 +42,12 @@ int main()
 
     while (q--)
     {
-        int a, b;
-        cin >> a >> b;
-        if (adj_mat[a][b] == INT_MAX)
+        int s, d;
+        cin >> s >> d;
+        if (adj_mat[s][d] == INT_MAX)
             cout << -1 << endl;
         else
-            cout << adj_mat[a][b] << endl;
+            cout << adj_mat[s][d] << endl;
     }
     return 0;
 }
