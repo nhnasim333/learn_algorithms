@@ -2,13 +2,13 @@
 using namespace std;
 int par[105];
 
-int find(int node)
+int find(int node) // O(logN)
 {
-    cout << node << endl;
     if (par[node] == -1)
         return node;
 
     int leader = find(par[node]);
+    par[node] = leader; // Path Compression
     return leader;
 }
 
@@ -23,6 +23,9 @@ int main()
     par[5] = 3;
 
     cout << find(4) << endl;
+
+    for (int i = 0; i < 6; i++)
+        cout << i << "-> " << par[i] << endl;
 
     return 0;
 }
