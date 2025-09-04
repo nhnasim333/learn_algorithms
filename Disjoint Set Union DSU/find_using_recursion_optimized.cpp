@@ -2,7 +2,7 @@
 using namespace std;
 int par[105];
 
-int find(int node) // O(n)
+int find(int node)
 {
     cout << node << endl;
     if (par[node] == -1)
