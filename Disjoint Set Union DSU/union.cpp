@@ -36,6 +36,7 @@ int main()
     memset(group_size, 1, sizeof(group_size));
 
     dsu_union(1, 2);
+    dsu_union(3, 5);
 
     cout << find(4) << endl;
 
