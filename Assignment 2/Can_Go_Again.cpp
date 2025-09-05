@@ -1,71 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+class Edge
+{
+public:
+    int a, b, w;
+    Edge(int a, int b, int w)
+    {
+        this->a = a;
+        this->b = b;
+        this->w = w;
+    }
+};
+
+int dis[105];
+vector<Edge> edge_list;
+int n, e;
+
 int main()
 {
-    int n, e;
     cin >> n >> e;
-    long long int adj_mat[n + 1][n + 1];
-
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            if (i == j)
-                adj_mat[i][j] = 0;
-            else
-                adj_mat[i][j] = LLONG_MAX;
-        }
-    }
-
     while (e--)
     {
-        int a, b;
-        long long w;
+        int a, b, w;
         cin >> a >> b >> w;
-        adj_mat[a][b] = min(adj_mat[a][b], w);
-    }
-
-    for (int k = 1; k <= n; k++)
-    {
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= n; j++)
-            {
-                if (adj_mat[i][k] != LLONG_MAX && adj_mat[k][j] != LLONG_MAX && adj_mat[i][k] + adj_mat[k][j] < adj_mat[i][j])
-                {
-                    adj_mat[i][j] = adj_mat[i][k] + adj_mat[k][j];
-                }
-            }
-        }
+        edge_list.push_back(Edge(a, b, w));
     }
 
     int src;
+    cin >> src;
+
     int q;
-    cin >> src >> q;
-    bool cycle = false;
+    cin >> q;
+    vector<int> queries(q);
+    for (int i = 0; i < q; i++)
+        cin >> queries[i];
 
-    for (int i = 1; i <= n; i++)
-    {
-        if (adj_mat[i][i] < 0)
-            cycle = true;
-    }
+    vector<long long> dist(n + 1, LLONG_MAX);
+    dist[src] = 0;
 
-    if (cycle)
+    for (int i = 1; i <= n - 1; i++)
     {
-        cout << "Negative Cycle Detected" << endl;
-    }
-    else
-    {
-        while (q--)
+        bool changed = false;
+        for (auto &ed : edge_list)
         {
-            int d;
-            cin >> d;
-            if (adj_mat[src][d] == LLONG_MAX)
-                cout << "Not Possible" << endl;
-            else
-                cout << adj_mat[src][d] << endl;
+            if (dist[ed.a] != LLONG_MAX && dist[ed.a] + ed.w < dist[ed.b])
+            {
+                dist[ed.b] = dist[ed.a] + ed.w;
+                changed = true;
+            }
+        }
+        if (!changed)
+            break;
+    }
+
+    for (auto &ed : edge_list)
+    {
+        if (dist[ed.a] != LLONG_MAX && dist[ed.a] + ed.w < dist[ed.b])
+        {
+            cout << "Negative Cycle Detected" << endl;
+            return 0;
         }
     }
+
+    for (int d : queries)
+    {
+        if (dist[d] == LLONG_MAX)
+            cout << "Not Possible" << endl;
+        else
+            cout << dist[d] << endl;
+    }
+
     return 0;
 }
