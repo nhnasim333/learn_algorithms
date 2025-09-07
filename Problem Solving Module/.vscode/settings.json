@@ -86,7 +86,8 @@
         "stdio.h": "c",
         "ostream": "cpp",
         "iostream": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "random": "cpp"
     },
    
 }
